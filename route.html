@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>车迹</title>
+</head>
+
+<body>
+
+    <div class="post-message-section">
+        <p id="messageText">8888</p>
+    </div>
+
+    <!-- uni 的 SDK -->
+    <script type="text/javascript" src="https://js.cdn.aliyun.dcloud.net.cn/dev/uni-app/uni.webview.1.5.2.js"></script>
+    <script language="javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=3f3f3a7f6a79ab1657c3a32cd66f1904&plugin=AMap.GraspRoad"></script>
+
+    <script type="text/javascript">
+        /**
+         * 计算两个坐标点的角度
+         * @param {Object} firstPoint 第一个经纬度坐标点
+         * @param {Object} nextPoint 下一个经纬度坐标点
+         * @returns {Number} 角度值
+         */
+        function getAngle(firstPoint, nextPoint) {
+            if (!(firstPoint && nextPoint)) {
+                return 0;
+            }
+
+            let dRotateAngle = Math.atan2(
+                Math.abs(firstPoint.lng - nextPoint.lng),
+                Math.abs(firstPoint.lat - nextPoint.lat)
+            );
+            if (nextPoint.lng >= firstPoint.lng) {
+                if (nextPoint.lat >= firstPoint.lat) {} else {
+                    dRotateAngle = Math.PI - dRotateAngle;
+                }
+            } else {
+                if (nextPoint.lat >= firstPoint.lat) {
+                    dRotateAngle = 2 * Math.PI - dRotateAngle;
+                } else {
+                    dRotateAngle = Math.PI + dRotateAngle;
+                }
+            }
+            dRotateAngle = (dRotateAngle * 180) / Math.PI;
+            return dRotateAngle;
+        }
+
+        function getpoints(points) {
+            /*
+            准备纠偏数据
+            */
+            var final_pts = []
+
+            for (var i = 1; i < points.length; i++) {
+                var final_pts_item = {};
+                var ag = 0;
+
+                var firstPoint = {
+                    'lng': points[i - 1]["longitude"],
+                    'lat': points[i - 1]["latitude"],
+                };
+                var nextPoint = {
+                    'lng': points[i]["longitude"],
+                    'lat': points[i]["latitude"],
+                };
+                ag = getAngle(firstPoint, nextPoint);
+
+                var x = points[i]["longitude"];
+                var y = points[i]["latitude"];
+
+                final_pts_item['tm'] = points[i]["tm"];
+                final_pts_item['ag'] = ag;
+                final_pts_item['sp'] = points[i]["sp"];
+                final_pts_item['x'] = x;
+                final_pts_item['y'] = y;
+                final_pts.push(final_pts_item);
+            }
+            return final_pts;
+        }
+
+        document.addEventListener('UniAppJSBridgeReady', function() {
+            window.jsfunction = function(points) {
+                var canshutype = typeof points;
+                var mes = typeof points == "object" ? JSON.stringify(points) : points;
+                document.getElementById('messageText').innerHTML = mes
+
+                var graspRoad;
+                var pathParam = getpoints(points);
+                if (!graspRoad) {
+                    graspRoad = new AMap.GraspRoad()
+                }
+                graspRoad.driving(pathParam, function(error, result) {
+                    /*
+                    	errcode: 20000
+                    	errdetail: "请求参数（单次请求请勿超过500个）非法，请参照接口开发文档进行调整"
+                    	errmsg: "INVALID_PARAMS"
+                    */
+                    var status = 0; // 成功
+                    var uniresult = {};
+                    if (!error) {
+                        uniresult = result;
+                    } else {
+                        //纠偏出现错误 
+                        var status = 1; // 失败
+                        uniresult = {
+                            "error": error,
+                            "points": points
+                        };
+                    }
+                    document.addEventListener('UniAppJSBridgeReady', function() {
+                        uni.postMessage({
+                            data: {
+                                "status": status,
+                                "result": uniresult
+                            }
+                        });
+                    });
+                })
+            }
+        });
+    </script>
+</body>
+
+</html>

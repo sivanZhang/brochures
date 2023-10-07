@@ -1,0 +1,321 @@
+body,
+html,
+#container {
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+    
+}
+
+.input-card {
+    top: 1rem;
+    left: 13.5rem;
+    width: 16rem;
+    height: 10rem;
+    z-index: 99;
+    position: fixed;
+}
+
+.input-card .btn {
+    margin-right: 1.2rem;
+    width: 6rem;
+}
+
+.icon {
+    overflow: hidden;
+    display: inline-block;
+    position: relative;
+    height: 100px;
+    width: 100px;
+}
+
+.icon-del {
+    height: 100%;
+    width: 100%;
+    display: inline-block;
+}
+
+.icon>.icon-del {
+    filter: drop-shadow(100px 0 #fff);
+    position: relative;
+    left: -100px;
+} 
+.shareImage{
+	width: 35px;
+	height: 35px;
+	background-color: #1b1b1b;
+	border-radius: 50%;
+	position: absolute;
+	top: 50px;
+	right: 20px;
+}
+.touxiang {
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: 10px;
+	left:20px;
+	top:50px;
+	position: fixed;
+}
+
+.share_img{
+	position: absolute;
+	top: 7px;
+	right: 7px;
+	width: 20px;
+	height: 20px;
+	border-radius: 0;
+}
+.main{
+	background-color: rgba(0, 0, 0, 0.4);
+	position: fixed;
+	bottom: 165px;
+	width: 100%; 
+}
+.input-card .btn:last-child {
+    margin-right: 0;
+}
+
+.btn-list {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    z-index: 99;
+    /* position: relative; */
+    width: 12rem;
+    height: 10rem;
+    border-width: 0;
+    border-radius: 0.4rem;
+    box-shadow: 0 2px 6px 0 rgba(114, 124, 245, 0.5);
+    position: fixed;
+    top: 1rem;
+    left: 0.5rem;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 0.75rem 1.25rem;
+}
+
+.bttn {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    margin-top: 1.5rem;
+    user-select: none;
+    border: 1px solid transparent;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    background-color: transparent;
+    background-image: none;
+    color: #25A5F7;
+    border-color: #25A5F7;
+    padding: .25rem .5rem;
+    line-height: 1.5;
+    border-radius: 1rem;
+    -webkit-appearance: button;
+    cursor: pointer;
+}
+
+
+/*自定义滚动条的伪对象选择器, CSS 可以隐藏滚动条*/
+
+#i::-webkit-scrollbar {
+    display: none;
+}
+ 
+@-webkit-keyframes heartBlast {
+    from {
+        background-position: left;
+    }
+    to {
+        background-position: right;
+    }
+}
+
+@keyframes heartBlast {
+    from {
+        background-position: left;
+    }
+    to {
+        background-position: right;
+    }
+}
+
+.heartAnimation {
+    -webkit-animation-name: heartBlast;
+    animation-name: heartBlast;
+    -webkit-animation-duration: .3s;
+    animation-duration: .3s;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+    -webkit-animation-timing-function: steps(28);
+    animation-timing-function: steps(28);
+    background-position: right;
+}
+
+.rightmark {
+    display: flex;
+    position: relative;
+    width: 20rem;
+    height: 4rem;
+    border-radius: 10px;
+    /* background-color: #fff; */
+    background: radial-gradient(circle at 0 25px, transparent 19px, #fff 25px) left;
+}
+
+.leftmark {
+    display: flex;
+    position: relative;
+    width: 20rem;
+    height: 4rem;
+    border-radius: 10px;
+    /* background-color: #fff; */
+    background: radial-gradient(circle at 230px 25px, transparent 19px, #fff 25px) right;
+	border: 1px solid red;
+}
+
+.speedmark {
+    display: flex;
+    position: relative;
+    width: 11rem;
+    height: 2.5rem;
+    border-radius: 10px;
+    /* background-color: #fff; */
+    background: radial-gradient(circle at 0 25px, transparent 19px, #fff 25px) left;
+}
+.coin {
+    text-align: center;
+}
+
+.markerimg {
+    border-radius: 50%;
+    height: 50px
+}
+.right-end{
+	text-align: right;
+	border: 1px solid red;
+}
+.speedimg {
+    border-radius: 5%;
+    height: 30px
+}
+.terminal_txt {
+    margin-top: 7px;
+}
+.speed_txt{
+    padding-left:5px;
+    padding-top:1px;
+    font-size: 10px;
+}
+.footer {
+    position: fixed;
+    z-index: 999;
+    bottom: 0;
+    width: 100%; 
+    overflow-y: hidden; 
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.erweima {
+    padding-top:1px;
+    width: 23%;
+    height: 100%;
+}
+
+.copyright-img {
+    height:100%;
+	width: 77%;
+}
+
+.copyright {
+    text-align: center;
+}
+
+.icon_pingtou {
+    width: 150px;
+    height: 13px;
+}
+
+.detail,
+.center_down,
+.firstfloor,
+.copyright {
+    display: flex;
+}
+
+
+.detail {
+    width: 100%;
+	text-align: center;
+	margin: 0 auto;
+}
+.left,
+.center,
+.right {
+	width: 33%;
+	/* 设置让其所在div居中 */
+	text-align: center;
+	margin: 0 auto;
+}
+
+.center_up {
+	font-size: 12px;
+	text-align: center;
+	color: white;
+	position: relative;
+}
+#chart{
+    top:5px
+}
+.icon_dian{
+	width: 10px;
+	height: 10px;
+}
+.firstfloor {
+    margin-top: 0px;
+    color : white; 
+    background-color: rgba(0, 0, 0, 0.3);
+}
+.speed{
+    width: 100%;
+    text-align: center;
+    color:white; 
+    padding-bottom: 5px;
+}
+.center_down {
+    /* margin-left: 30px; */
+}
+.center-text,.coin,.consume{
+	font-size: 12px;
+	text-align: center;
+	color: white;
+	height:17px;
+}
+.endttime,.starttime {
+	text-align: center;
+	color: white;
+	font-size:14px;
+}
+.city,.end_city{
+	font-size:16px;
+	top:-2.5px;
+	position:relative;
+}
+.distribute{
+	font-size:14px;
+	position:relative;
+	text-align:center;
+}
+.center-left{
+	flex:1;
+	position:relative;
+	left:10px;
+}
+.time_consume {
+    /* margin-left: 15px; */
+	flex:1;
+	position:relative;
+}
