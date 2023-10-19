@@ -1,0 +1,19 @@
+// 高宽百分比的混入    $height = 高宽百分比或者固定高度    $child-selector 被包裹的子元素选择器
+@mixin percent-wrap($height, $child-selector) {
+    position: relative;
+    width: 100%;
+    display: block;
+    &::after {
+        content: ' ';
+        display: block;
+        padding-bottom: $height;
+    }
+    #{$child-selector} {
+        position: absolute;
+        display: block;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+    }
+}
