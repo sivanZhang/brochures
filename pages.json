@@ -4,7 +4,16 @@
 		"style": {
 			"navigationBarTitleText": "uni-app"
 		}
-	}],
+	}    ,{
+            "path" : "pages/brochures_b/brochures_b",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
