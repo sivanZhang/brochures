@@ -1,27 +1,25 @@
 {
-	"pages": [{
-		"path": "pages/index/index",
-		"style": {
-			"navigationBarTitleText": "uni-app"
-		}
-	}    ,{
-            "path" : "pages/brochures_b/brochures_b",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
+    "pages": [{
+        "path": "pages/index/index",
+        "style": {
+            "navigationBarTitleText": "uni-app"
         }
-    ],
-	"globalStyle": {
-		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8",
-		"app-plus": {
-			"background": "#efeff4"
-		},
-		"navigationStyle":"custom"
-	}
+    }, {
+        "path": "pages/brochures_b/brochures_b",
+        "style": {
+            "navigationBarTitleText": "",
+            "enablePullDownRefresh": false
+        }
+
+    }],
+    "globalStyle": {
+        "navigationBarTextStyle": "black",
+        "navigationBarTitleText": "uni-app",
+        "navigationBarBackgroundColor": "#F8F8F8",
+        "backgroundColor": "#F8F8F8",
+        "app-plus": {
+            "background": "#efeff4"
+        },
+        "navigationStyle": "custom"
+    }
 }
