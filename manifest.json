@@ -59,8 +59,8 @@
     "vueVersion" : "3",
     "h5" : {
         "router" : {
-            "mode" : "history",
-            "base" : "./"
+            "mode" : "hash",
+            "base" : "/tpls/"
         },
         "optimization" : {
             "treeShaking" : {
