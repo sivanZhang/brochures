@@ -58,6 +58,14 @@
     },
     "vueVersion" : "3",
     "h5" : {
+		"devServer" : {
+		    "proxy" : {
+		        "/api" : {
+		            "target" : "https://fun.chidict.com",
+		            "changeOrigin" : true
+		        }
+		    }
+		},
         "router" : {
             "mode" : "history",
             "base" : "./"

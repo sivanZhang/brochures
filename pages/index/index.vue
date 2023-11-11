@@ -73,7 +73,7 @@
 					优惠券2
 				</view>
 				<view class="expiration-date">
-					有效期：2023/4/22
+					有效期：{{pageData.date}}
 				</view>
 				<view class="detail-interaction">
 					<view class="use-rule">
@@ -128,7 +128,8 @@
 			</view>
 			<view class="news-trik">
 				<image class="icon-msg" src="/static/page1/lb.png" mode=""></image>
-				<lw-notice-v :showNum="3" :height="16" :speed="30" :gap="0" itemStyle :list="list" :showAvatar="false" :showOrder="false" :styles="styles" />
+				<lw-notice-v :showNum="3" :height="16" :speed="30" :gap="0" itemStyle :list="list" :showAvatar="false"
+					:showOrder="false" :styles="{color:userColor}" />
 			</view>
 			<view class="load-more">
 				查看更多
@@ -143,29 +144,43 @@
 <script setup>
 	import {
 		ref,
+		onMounted,
 		reactive
 	} from 'vue';
-	const list = reactive([{
-		contents: ['某某某']
-	},{
-		contents: ['某某某']
-	},{
-		contents: ['某某某']
-	},{
-		contents: ['某某某']
-	},{
-		contents: ['某某某']
-	},{
-		contents: ['某某某']
-	},{
-		contents: ['某某某']
-	},{
+	import {
+		getPageVar
+	} from "@/api/common.js"
+
+	// ref定义响应式简单数据
+	const userColor = ref('#1d201e')
+
+	// reactive 返回一个对象的响应式代理
+	const billList = reactive([{
+		contents: ['某某某', '2023/4/22', '中奖']
+	}, {
 		contents: ['某某某']
 	}])
-	const styles = reactive([{
-			color: '#1d201e'
-		},
-	])
+
+	const pageData = reactive({
+		title: '测试',
+		desc: "",
+		date: "2023/4/22"
+	})
+
+
+	const getBillList = async () => {
+		const {
+			data
+		} = await getPageVar()
+		userColor.value = data.color // 注意！！ 在script中ref必须要用value属性访问，但是在template中可以直接访问，vue已经解构
+		billList = data.list //[]
+		pageData = data.desc //{}
+	}
+
+	// 注册一个回调函数，在组件挂载完成后执行。比如请求接口
+	onMounted(() => {
+		getBillList()
+	})
 </script>
 
 
@@ -185,14 +200,15 @@
 		font-size: 28rpx;
 		background: linear-gradient(to right bottom, rgb(202, 238, 194), rgb(222, 239, 227));
 		min-height: 100vh;
-		:deep .ranking-item{
+
+		:deep .ranking-item {
 			background-color: transparent;
 			color: #1d201e;
 			padding: 0;
-			height:36rpx!important;
-			
-			.notice-text{
-				font-size: 20rpx!important;
+			height: 36rpx !important;
+
+			.notice-text {
+				font-size: 20rpx !important;
 			}
 		}
 
@@ -242,15 +258,18 @@
 					padding: 24rpx;
 					display: flex;
 					flex-direction: column;
-					.topic-footer{
+
+					.topic-footer {
 						display: flex;
 						justify-content: space-between;
 						align-items: flex-end;
 					}
+
 					.go-topic {
 						margin-top: 100rpx;
 					}
-					.app-btn{
+
+					.app-btn {
 						display: block;
 						width: 60rpx;
 						height: 60rpx;
@@ -445,15 +464,18 @@
 				background: url(/static/page1/tt.png) no-repeat center;
 				background-size: contain;
 			}
-			.news-trik{
+
+			.news-trik {
 				display: flex;
-				image{
+
+				image {
 					width: 28rpx;
 					height: 28rpx;
 					margin-right: 14rpx;
 				}
 			}
-			.load-more{
+
+			.load-more {
 				display: flex;
 				flex-direction: column;
 				justify-content: center;
