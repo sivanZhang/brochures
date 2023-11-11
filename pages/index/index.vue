@@ -151,6 +151,10 @@
 		getPageVar
 	} from "@/api/common.js"
 
+	import {
+		onLoad
+	} from '@dcloudio/uni-app'
+
 	// ref定义响应式简单数据
 	const userColor = ref('#1d201e')
 
@@ -177,11 +181,22 @@
 		pageData = data.desc //{}
 	}
 
+
+
 	// 注册一个回调函数，在组件挂载完成后执行。比如请求接口
 	onMounted(() => {
-		getBillList()
+		// getBillList()
 	})
+
+
+	onLoad((params) => {
+		console.log(params);
+	})
+	
+	
 </script>
+
+
 
 
 

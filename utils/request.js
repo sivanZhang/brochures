@@ -6,7 +6,7 @@
  */
 
 import Request from '@/js_sdk/luch-request/luch-request/index.js'
-import define from '@/define.js'
+import define from '@/config/define.js'
 
 
 const OPTIONS = {
@@ -73,7 +73,7 @@ const errorCallback = ({
 				title: '服务器打瞌睡了'
 			})
 			break;
-		default:// response.data.code !== 200或者statusCode=其他走这里
+		default: // response.data.code !== 200或者statusCode=其他走这里
 			uni.showToast({
 				title: data?.message || "响应错误"
 			})
