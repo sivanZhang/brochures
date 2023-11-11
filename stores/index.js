@@ -29,10 +29,7 @@ export const useCounterStore = defineStore('counter', () => {
 	};
 });
 /* 
- 
  组件中使用它
- 
- 
  <script setup>
  import { useCounterStore } from '@/stores/counter'
  const counter = useCounterStore()
