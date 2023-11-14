@@ -1,6 +1,7 @@
 <template>
 	<view class="container">
-		<view class="base-title">
+		<view class="base-title
+">
 			商家展示
 		</view>
 		<view class="banner">
@@ -9,10 +10,31 @@
 					社区福利
 				</view>
 			</view>
-            <view  v-html="pageData.detail" class="detail" ></view>
-			<view class="vphone" @click="callPhone">
-			    <image class="phone-img" src="/static/page1/phone.png" mode="aspectFit"></image>
-			    <view class="phone-txt">联系电话:{{pageData.phone}}</view>
+			<view class="base-title">
+				营销主题
+			</view>
+			<view class="banner-blocks">
+				<view class="banner-block-first">
+					营销主题1
+					<view class="topic-introduction">
+						主题简介
+					</view>
+					<view class="topic-footer">
+						<view class="go-topic">
+							go>
+						</view>
+						<image class="app-btn" src="/static/page1/rj.png" mode=""></image>
+					</view>
+				</view>
+				<view class="banner-block-second">
+					营销主题2
+					<view class="topic-introduction">
+						主题简介
+					</view>
+					<view class="immediate-join">
+						立即参与
+					</view>
+				</view>
 			</view>
 		</view>
 		<view class="discount-coupon">
@@ -114,7 +136,6 @@
 				<uni-icons color="#c9c9c9" type="bottom" size="10"></uni-icons>
 			</view>
 		</view>
-        
 
 	</view>
 </template>
@@ -147,9 +168,7 @@
 	const pageData = reactive({
 		title: '测试',
 		desc: "",
-        detail:'<img src="./static/page1/data/detail.jpg" />',
-		date: "2023/4/22",
-        phone:"13032985685"
+		date: "2023/4/22"
 	})
 
 
@@ -161,12 +180,6 @@
 		billList = data.list //[]
 		pageData = data.desc //{}
 	}
-    
-    function callPhone(){
-        uni.makePhoneCall({
-            phoneNumber:pageData.phone
-        })
-    }
 
 
 
@@ -183,7 +196,10 @@
 	
 </script>
 
- 
+
+
+
+
 <style scoped lang="scss">
 	$title-size: 32rpx;
 	$el-space: 24rpx;
@@ -199,20 +215,6 @@
 		font-size: 28rpx;
 		background: linear-gradient(to right bottom, rgb(202, 238, 194), rgb(222, 239, 227));
 		min-height: 100vh;
-        .vphone{
-            display: flex;
-            text-align: center;
-            line-height: 50rpx;
-            .phone-img{
-                width:50rpx;
-                height: 50rpx;
-                margin-right: 15rpx;
-            }
-            
-            .phone-txt{
-                color: #1296db;
-            }
-        }
 
 		:deep .ranking-item {
 			background-color: transparent;
@@ -234,14 +236,6 @@
 			padding: $el-space;
 			background-color: #fff;
 			border-radius: 12rpx;
-            .detail{
-                width: 100%;
-                overflow: hidden; 
-                :deep(img){
-                   max-width: 100%;
-                }
-            }
-            
 
 			.banner__header {
 				background: linear-gradient(114deg, #a6f3e0, #eafff1);
