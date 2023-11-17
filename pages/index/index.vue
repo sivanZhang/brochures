@@ -48,7 +48,7 @@
 
         <view class="store-show">
             <view class="base-title">
-                展示门店
+                参与门店
             </view>
 
             <Store :stores="pageData.stores"></Store>
@@ -99,6 +99,8 @@
     const billList = reactive([{
         contents: ['张**', '2023/4/22', '购买了1499茅台']
     }, {
+        contents: ['白叟**', '2023/4/22', '购买了1499茅台']
+    }, {
         contents: ['镜花**', '2023/4/23', '购买了食用油']
     }])
 
@@ -126,14 +128,14 @@
         stores: [{
                 name: "加盟店",
                 chargername: "李先生",
-                image: "https://ts1.cn.mm.bing.net/th/id/R-C.cc6b075710774e3bb67766f95f5235f8?rik=iSkQxehAw4781w&riu=http%3a%2f%2fn.sinaimg.cn%2ftranslate%2f213%2fw2048h1365%2f20191031%2f5486-ihqyuym8135166.jpg&ehk=%2fevbiduhBnaHn0nE0Ut16tF%2f0Nc2Fs4O79Va3toxtr8%3d&risl=&pid=ImgRaw&r=0",
+                image: "/static/page1/data/m1.jpg",
                 address: "地址:XXXXXXXXXXXXXXXXX",
                 phone: "xxxx"
             },
             {
                 name: "旗舰店",
                 chargername: "福先生",
-                image: "https://ts1.cn.mm.bing.net/th/id/R-C.7ce02c5f70de8663f400fff68e53755a?rik=oMKRpkbBB4QDZA&riu=http%3a%2f%2fwww.tk1997.com%2fattached%2fimage%2f20140110%2f20140110144632_7597.jpg&ehk=TKCdsngG2sm1CmESdQ6jqYXTrieK5wfx2sDEIx7ucRg%3d&risl=&pid=ImgRaw&r=0",
+                image: "/static/page1/data/m2.jpg",
                 address: "",
                 phone: "xxxx",
             }
