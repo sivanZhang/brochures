@@ -49,7 +49,7 @@
     }
 </script>
 
-<style>
+<style scoped lang="scss">
 /* 门店信息 */
     .group-item-stores{
         display: flex;
@@ -60,8 +60,8 @@
                  width: 200rpx;
                  height: 200rpx;
                  border-radius: 15rpx;
-                 border: 1px solid $border-color-base;
-                 box-shadow: 0px 0px 5px $border-color-base;
+                 border: 1px solid #E4E7ED;
+                 box-shadow: 0px 0px 5px #E4E7ED;
              }
          }
          
@@ -74,7 +74,7 @@
                  align-items: center;
                  .tag{
                      font-size: 24upx;
-                     color: $base-color;
+                     color:#FF8000;
                      margin-right: 10upx;
                      background: #fffafb;
                      border: 1px solid #ffb4c7;
@@ -84,16 +84,16 @@
                  }
                  .address{
                      font-size: 30upx;
-                     color: $font-color-dark;
+                     color:#303133;
                  }
                  .storename{
                     font-weight: bold;
-                    color:$base-color;
+                    color:#FF8000;
                 }
              }
              .u-box{
                  font-size: 28upx;
-                 color: $font-color-light;
+                 color: #909399;
                  margin-top: 16upx;
                  .name{
                      margin-right: 30upx;
