@@ -17,6 +17,8 @@ app.$mount()
 import { createSSRApp } from 'vue'
 import * as Pinia from 'pinia';
 import App from './App.vue'
+
+ 
 export function createApp() {
   const app = createSSRApp(App)
   // app.use(Pinia.createPinia())  应该是挂在到 vue.$store上
