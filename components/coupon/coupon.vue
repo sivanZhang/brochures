@@ -31,7 +31,7 @@ export default {
         title:{
             type:String,
             default : function(){
-                return "洗车券"
+                return ""
             }
         }, 
         content:{
@@ -58,7 +58,10 @@ export default {
                 return ""
             }
         }
-    }
+    },
+     
+    
+     
 }
 </script>
 <style scoped lang="scss">
