@@ -75,8 +75,8 @@
         reactive
     } from 'vue';
     import {
-        getPageVar
-    } from "@/api/common.js"
+        getBrochureData
+    } from "@/api/brochure.js"
 
     import medias from '@/components/articles/medias'
     import Coupon from "@/components/coupon/coupon.vue"
@@ -98,7 +98,7 @@
     }])
 
     const pageData = reactive({
-        title: '测试',
+        title: '狂欢双十一',
         desc: "",
         detail: '<img src="./static/page1/data/detail.jpg" />',
         date: "2023/4/22",
@@ -152,10 +152,21 @@
     })
 
 
-    const getBillList = async () => {
+    const getBillList = async ( ) => {
         const {
             data
-        } = await getPageVar()
+        } = await getBrochureData( )
+        console.log(data)
+        userColor.value = data.color // 注意！！ 在script中ref必须要用value属性访问，但是在template中可以直接访问，vue已经解构
+        //billList = data.list //[]
+        pageData = data.desc //{}
+    }
+    
+    function getData(uuid){
+        const {
+            data
+        } =   getBrochureData({uuid:uuid})
+        console.log(data)
         userColor.value = data.color // 注意！！ 在script中ref必须要用value属性访问，但是在template中可以直接访问，vue已经解构
         //billList = data.list //[]
         pageData = data.desc //{}
@@ -171,7 +182,10 @@
 
     // 注册一个回调函数，在组件挂载完成后执行。比如请求接口
     onMounted(() => {
-        // getBillList()
+        getData("71af48ca-e1be-4190-a496-e90ac7750400")
+        uni.setNavigationBarTitle({
+            title:pageData.title
+        })
     })
 
 
