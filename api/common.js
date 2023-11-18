@@ -7,6 +7,7 @@ export const getPageVar = params => {
 	})
 }
 
+// 仅演示
 export const editPage = data => {
 	return http.post('/path_a/path_b', data)
 }
