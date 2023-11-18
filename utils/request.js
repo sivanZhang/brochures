@@ -53,9 +53,7 @@ const errorCallback = ({ statusCode, data = {} }) => {
 			uni.showToast({
 				title: '登录信息已过期',
 			})
-			// if (store.getters.hasLogin) {
-			// 	store.commit('logout')
-			// }
+
 			break
 		case 405:
 			uni.showToast({
@@ -72,18 +70,17 @@ const errorCallback = ({ statusCode, data = {} }) => {
 				title: '服务器打瞌睡了',
 			})
 			break
-		default: // response.data.code !== 200或者statusCode=其他走这里
-			uni.showToast({
-				title: data?.message || '响应错误',
-			})
+		default: // response.data.status !== 0或者statusCode=其他走这里
+			/* uni.showToast({
+				title: data?.msg || '响应错误',
+			}) */
 			break
 	}
 }
 
 http.interceptors.response.use(
 	response => {
-		debugger
-		if (response.data.code !== 200) {
+		if (response.data.status !== 0) {
 			// 后端返回的code码
 			return Promise.reject(response.data)
 		}
