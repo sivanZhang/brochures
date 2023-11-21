@@ -13,34 +13,18 @@ import {
 	computed
 } from 'vue';
 
-export const useCounterStore = defineStore('counter', () => {
-	const store_state = ref(0);
+export const useCommonStore = defineStore('common', () => {
+	const token = ref('一个token值');
 
-	function store_action(newVal) {
-		count.value = newVal;
+	function logout() {
+		token.value = null;
 	}
 
-	const store_getter = computed(() => store_state.value + 1)
+	const isLogin = computed(() => !!token.value)
 
 	return {
-		store_state,
-		store_action,
-		store_getter
+		token,
+		isLogin,
+		logout
 	};
 });
-/* 
- 组件中使用它
- <script setup>
- import { useCounterStore } from '@/stores/counter'
- const counter = useCounterStore()
- counter.count++
- // 自动补全！ ✨
- counter.$patch({ count: counter.count + 1 })
- // 或使用 action 代替
- counter.increment()
- </script>
- <template>
-   <!-- 直接从 store 中访问 state -->
-   <div>Current Count: {{ counter.count }}</div>
- </template>
- */

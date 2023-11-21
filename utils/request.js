@@ -6,7 +6,7 @@
  */
 
 import Request from '@/js_sdk/luch-request/luch-request/index.js'
-import define from '@/config/define.js'
+import define from '@/utils/define'
 
 const OPTIONS = {
 	baseURL: define.baseUrl,
@@ -37,12 +37,14 @@ http.interceptors.request.use(
 		return config
 	},
 	config => {
-		// 可使用async await 做异步操作
 		return Promise.reject(config)
 	}
 )
 
-const errorCallback = ({ statusCode, data = {} }) => {
+const errorCallback = ({
+	statusCode,
+	data = {}
+}) => {
 	switch (statusCode) {
 		case 400:
 			uni.showToast({
@@ -79,12 +81,14 @@ const errorCallback = ({ statusCode, data = {} }) => {
 }
 
 http.interceptors.response.use(
-	response => {
-		if (response.data.status !== 0) {
+	({
+		data
+	}) => {
+		if (data.status !== 0) {
 			// 后端返回的code码
-			return Promise.reject(response.data)
+			return Promise.reject(data)
 		}
-		return response.data // 直接返回data不需要在then中判断是否===200
+		return data // 直接返回data不需要在then中判断是否===200
 	},
 	error => {
 		errorCallback(error)

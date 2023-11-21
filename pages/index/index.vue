@@ -58,12 +58,12 @@
 	import {
 		ref,
 		onMounted,
-		reactive
+		reactive,
+		inject
 	} from 'vue'
 	import {
 		getBrochureData
-	} from '@/api/brochure.js'
-
+	} from '@/api/brochure'
 	import medias from '@/components/articles/medias'
 	import Coupon from '@/components/coupon/coupon.vue'
 	import Store from '@/components/store/store.vue'
@@ -71,10 +71,22 @@
 		onLoad
 	} from '@dcloudio/uni-app'
 
-	// ref定义响应式简单数据
-	const userColor = ref('#1d201e')
+	import {
+		useCommonStore
+	} from "@/stores/index"
 
-	// reactive 返回一个对象的响应式代理
+
+	const commonStore = useCommonStore()
+	console.log('token', commonStore.token);
+	const globalData = inject('globalData')
+	console.log('globalData', globalData);
+
+	// ref定义响应式简单数据、或者对象 用.value属性访问
+	const userColor = ref('red')
+	// userColor.value=2 
+	// console.log(userColor.value)    '2'
+
+	// reactive 返回一个对象的响应式代理  billList重新赋值( billList='...')会失去响应式
 	const billList = reactive([{
 			contents: ['张**', '2023/4/22', '购买了1499茅台'],
 		},
@@ -84,7 +96,15 @@
 		{
 			contents: ['镜花**', '2023/4/23', '购买了食用油'],
 		},
+		{
+			contents: ['镜花**', '2023/4/23', '购买了食用油'],
+		},
+		{
+			contents: ['镜花**', '2023/4/23', '购买了食用油'],
+		},
 	])
+
+
 
 	const pageData = reactive({
 		title: '狂欢双十一',
@@ -140,16 +160,6 @@
 		],
 	})
 
-	//   仅演示
-	const getBillList = async () => {
-		const {
-			data
-		} = await getBrochureData()
-		console.log(data)
-		userColor.value = data.color // 注意！！ 在script中ref必须要用value属性访问，但是在template中可以直接访问，vue已经解构
-		billList = data.list //[]
-		pageData = data.desc //{}
-	}
 
 	async function getData(uuid) {
 		const res = await getBrochureData({
@@ -165,12 +175,16 @@
 		})
 	}
 
-	// 注册一个回调函数，在组件挂载完成后执行。比如请求接口
+
 	onMounted(() => {
 		getData('71af48ca-e1be-4190-a496-e90ac7750400')
 		uni.setNavigationBarTitle({
 			title: pageData.title,
 		})
+	})
+
+	onMounted(() => {
+		console.log('第二个onMounted，会和其他的onMounted合并');
 	})
 
 	onLoad(params => {

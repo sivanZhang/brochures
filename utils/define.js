@@ -2,8 +2,7 @@
  * 
  *@desc  定义环境变量 
  * 
- * 
-  */
+ */
 
 
 let baseUrl = 'https://property.chidict.com/api'

@@ -1,31 +1,18 @@
-
-// #ifndef VUE3
-import Vue from 'vue'
-import App from './App'
-
-Vue.config.productionTip = false
-
-App.mpType = 'app'
-
-const app = new Vue({
-    ...App
-})
-app.$mount()
-// #endif
-
-// #ifdef VUE3
-import { createSSRApp } from 'vue'
 import * as Pinia from 'pinia';
 import App from './App.vue'
+import * as filters from '@/utils/common'
+import {
+	createSSRApp
+} from 'vue'
 
- 
 export function createApp() {
-  const app = createSSRApp(App)
-  // app.use(Pinia.createPinia())  应该是挂在到 vue.$store上
-   
-  return {
-    app,
-	Pinia
-  }
+	const app = createSSRApp(App)
+	const pinia = Pinia.createPinia()
+	// 注入全局属性，可以在组件中用inject访问
+	app.provide('globalData', 2) // inject('globalData')
+	app.use(pinia)
+	return {
+		app,
+		Pinia
+	}
 }
-// #endif
