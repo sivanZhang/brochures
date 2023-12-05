@@ -2,7 +2,7 @@
 	<!--顶部卡片等：图片、视频 -->
 	<view class="media-card">
 		<view class="pics" v-if="pics.length">
-			<swiper :current="swiperCurrent" @change="handleDotChange" :style="style" :circular="true" class="swiper">
+			<swiper :current="swiperCurrent" @change="handleDotChange" :circular="true" class="swiper">
 				<swiper-item v-for="(item, index) in pics" :key="index">
 					<view class="swiper-item">
 						<image :src="item.url" mode="aspectFit" @load="index===0 && calcSwiperHeight($event)"
@@ -21,6 +21,7 @@
 	</view>
 </template>
 
+
 <script>
 	export default {
 		/* 通用卡片 */
@@ -34,18 +35,16 @@
 				type: String,
 				default: ""
 			},
-            baseImagesUrl:{
-                type: String,
-                default: ""
-            }
+			baseImagesUrl: {
+				type: String,
+				default: ""
+			}
 		},
 		data() {
 			return {
 				swiperCurrent: 0,
-				controls: true, 
-				style: {
-					height: `750rpx`
-				}
+				controls: true,
+				height: `750rpx`
 			};
 		},
 		methods: {
@@ -60,31 +59,36 @@
 					height,
 					width
 				} = detail || {};
-				this.style.height = `${(750*height/width)||750}rpx`;
+				const SWIPER_WIDTH = 654
+				this.height = `${(SWIPER_WIDTH*height/width)||750}rpx`
 			}
 		},
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 	.media-card {
 		.pics {
 			overflow: hidden;
 			text-align: center;
 			position: relative;
-		
+
 			.swiper {
 				background-color: #dbdbdb;
 				transition: height .18s ease;
+				height: v-bind(height);
+
 				.swiper-item {
+					width: 100%;
 					height: 100%;
-                    border:1px solid red;
+
 					.swiperimage {
 						width: 100%;
 						height: 100%;
-						object-fit: contain;
 					}
 				}
+
+
 			}
 
 			.dots {
@@ -98,6 +102,7 @@
 				border-radius: 25rpx;
 				background-color: rgba(91, 91, 91, 0.7);
 				z-index: 1;
+
 				.dot {
 					line-height: 50rpx;
 				}
