@@ -4,13 +4,13 @@
 		<view class="banner">
 			<view class="banner__header">
 				<view class="header-tag"> 社区福利 </view>
-				<medias :pics="pageData.pics"></medias>
+				<medias :pics="pageData.img"></medias>
 			</view>
 
-			<view v-html="pageData.detail" class="detail"></view>
+			<view v-html="pageData.detail.rules" class="detail"></view>
 			<view class="vphone" @click="callPhone">
 				<image class="phone-img" src="/static/page1/phone.png" mode="aspectFit"></image>
-				<view class="phone-txt">联系电话:{{ pageData.phone }}</view>
+				<view class="phone-txt">联系电话:{{ pageData.detail.phone }}</view>
 			</view>
 		</view>
 		<view class="discount-coupon" v-for="(item, index) in pageData.coupons" :key="index">
@@ -20,9 +20,9 @@
 
 		<view class="commodities-show">
 			<view class="base-title"> 商品展示 </view>
-			<view class="commodities-item" v-for="item of pageData.products" :key="item">
+			<view class="commodities-item" v-for="item of pageData.commodities" :key="item">
 				<view class="image-wrap">
-					<image class="commodities-image" mode="aspectFit" :src="item.url">
+					<image class="commodities-image" mode="aspectFill" :src="item.picture">
 					</image>
 				</view>
 				<view class="commodities-name">
@@ -31,7 +31,7 @@
 				<view class="commodities-price">
 					<view class="price-label"> 抢购价 </view>
 					<view class="money-icon"> ¥ </view>
-					{{ item.price }}
+					{{ item.now_price }}
 				</view>
 			</view>
 		</view>
@@ -74,7 +74,7 @@
 	import {
 		useCommonStore
 	} from "@/stores/index"
-
+	import define from '@/utils/define'
 
 	const commonStore = useCommonStore()
 	console.log('token', commonStore.token);
@@ -105,14 +105,17 @@
 	])
 
 
-
-	const pageData = reactive({
+	const baseImageUrl = define.HOSTimage
+	 let pageData = ref({
 		title: '狂欢双十一',
 		desc: '',
-		detail: '<img src="./static/page1/data/detail.jpg" />',
+		detail:{
+			rules:'<img src="./static/page1/data/detail.jpg" />',
+			phone:"123"
+		}, 
 		date: '2023/4/22',
 		phone: '13032985685',
-		pics: [{
+		img: [{
 				url: '/static/page1/data/pic1.jpg',
 			},
 			{
@@ -142,20 +145,20 @@
 				phone: 'xxxx',
 			},
 		],
-		products: [{
+		commodities: [{
 				title: '食用油',
-				price: 199,
-				url: '/static/page1/data/p1.jpg',
+				now_price: 199,
+				picture: '/static/page1/data/p1.jpg',
 			},
 			{
 				title: '茅台酒',
-				price: 1499,
-				url: '/static/page1/data/p2.jpg',
+				now_price: 1499,
+				picture: '/static/page1/data/p2.jpg',
 			},
 			{
 				title: 'iPhone 15 256G',
-				price: 12499,
-				url: '/static/page1/data/p3.jpg',
+				now_price: 12499,
+				picture: '/static/page1/data/p3.jpg',
 			},
 		],
 	})
@@ -167,6 +170,12 @@
 		})
 		// 这里无需判断res.status===0；res.status!==0时会走Promise.reject()
 		console.log(res.msg)
+		let tmp = res.msg
+		tmp.commodities.forEach(element => {
+			element.picture = baseImageUrl + element.picture
+		});
+		pageData.value = res.msg 
+		console.log(pageData)
 	}
 
 	function callPhone() {
@@ -177,18 +186,17 @@
 
 
 	onMounted(() => {
-		getData('71af48ca-e1be-4190-a496-e90ac7750400')
+		console.log('第二个onMounted，会和其他的onMounted合并');
+		
 		uni.setNavigationBarTitle({
 			title: pageData.title,
 		})
 	})
-
-	onMounted(() => {
-		console.log('第二个onMounted，会和其他的onMounted合并');
-	})
+ 
 
 	onLoad(params => {
 		console.log(params)
+		getData('71af48ca-e1be-4190-a496-e90ac7750400')
 	})
 </script>
 

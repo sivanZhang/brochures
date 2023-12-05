@@ -23,6 +23,7 @@
 </template>
 
 <script>
+    import define from '@/utils/define'
     export default {
         name:"store",
         props:{
@@ -31,14 +32,13 @@
                 default:function(){
                     return []
                 }
-            } ,
-            baseImageUrl :{
-                type: String,
-                default:function(){
-                    return ""
-                }
-            }
+            }  
         } ,
+        data() {
+			return {
+				baseImageUrl:define.HOSTimage
+			};
+		},
         methods: {
             callPhone(phone) {
                 uni.makePhoneCall({
