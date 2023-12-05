@@ -66,7 +66,7 @@
 	}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	.media-card {
 		.pics {
 			overflow: hidden;
