@@ -11,6 +11,13 @@
 			"enablePullDownRefresh": false
 		}
 
+	}, {
+		"path": "pages/brochures_c/brochures_c",
+		"style": {
+			"navigationBarTitleText": "",
+			"enablePullDownRefresh": false
+		}
+
 	}],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
